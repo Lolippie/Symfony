@@ -20,39 +20,7 @@
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium, debitis delectus dolorem, est eveniet ex explicabo id iure iusto magni maiores nam non numquam odio officiis quaerat reiciendis repellat totam.</p>
                 <a href="#" class="btn btn-light">Lire la suite</a>
             </article>
-            <article>
-                <h3>Horaires d'ouverture</h3>
-                <table class="opening-hours">
-                    <tr>
-                        <td>Lundi</td>
-                        <td class="hours">9h - 17h</td>
-                    </tr>
-                    <tr class="today">
-                        <td>Mardi</td>
-                        <td class="hours">9h - 17h</td>
-                    </tr>
-                    <tr>
-                        <td>Mercredi</td>
-                        <td class="hours">9h - 17h</td>
-                    </tr>
-                    <tr>
-                        <td>Jeudi</td>
-                        <td class="hours">9h - 17h</td>
-                    </tr>
-                    <tr>
-                        <td>Vendredi</td>
-                        <td class="hours">9h - 17h</td>
-                    </tr>
-                    <tr>
-                        <td>Samedi</td>
-                        <td class="hours">9h - 12h</td>
-                    </tr>
-                    <tr>
-                        <td>Dimanche</td>
-                        <td class="hours">Fermé</td>
-                    </tr>
-                </table>
-            </article>
+            {% include 'openingHour/index.html.twig' with {'opening_hours' : opening_hours} only%}
             <article>
                 <h3>Numéro d'urgence</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci assumenda aut delectus dolores illo laboriosam provident reiciendis tempore vel?</p>
@@ -90,10 +58,9 @@
                     </button>
                 </form>
             </article>
-        {%include 'doctor/_thumbnail.html.twig' with {'photo' : 'doctor-1.jpg', 'fullname': 'Jack Smith'} %}
-                {%include 'doctor/_thumbnail.html.twig' with {'photo' : 'doctor-2.jpg', 'fullname': 'Norma Pedric'} %}
-
-        {%include 'doctor/_thumbnail.html.twig' with {'photo' : 'doctor-3.jpg', 'fullname': 'Maria Martin'} %}
+            {%for doctor in doctors %}
+                {% include 'doctor/_thumbnail.html.twig' with {'doctor' : doctor} only%}
+            {%endfor%}
 
         </div>
     </section>
