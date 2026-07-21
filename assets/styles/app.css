@@ -71,6 +71,27 @@ svg { height: 1em; flex-shrink: 0; }
 .btn.btn-light { background-color: var(--color-primary); }
 .btn.btn-light:hover { background-color: var(--color-primary-dark); }
 
+/* Carte : bloc de contenu surleve, reutilisable partout */
+
+.card {
+    padding: 2em;
+    background-color: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+}
+
+.card > h2 {
+    margin: 0 0 0.2em;
+    font-size: 1.8em;
+    color: var(--color-secondary);
+}
+
+.card > .card-subtitle {
+    margin: 0 0 1.8em;
+    color: var(--color-text-light);
+}
+
 /* Formulaires */
 
 form input,
@@ -99,6 +120,110 @@ form select:focus {
     box-shadow: 0 0 0 3px rgba(0, 179, 204, 0.18);
     outline: none;
 }
+
+/* Champ de formulaire : libelle + saisie + message d'aide */
+
+.form-field { margin-bottom: 1.2em; }
+
+.form-field label {
+    display: block;
+    margin-bottom: 0.35em;
+    font-size: 0.92em;
+    font-weight: 600;
+    color: var(--color-secondary);
+}
+
+.form-field :is(input, textarea, select) { margin-bottom: 0; }
+
+.form-field .hint { display: block; margin-top: 0.35em; font-size: 0.85em; color: var(--color-text-light); }
+
+/* Case a cocher : la saisie reprend sa largeur naturelle */
+
+.form-check { display: flex; align-items: center; gap: 0.6em; margin-bottom: 1.2em; }
+
+.form-check input { width: auto; margin: 0; }
+
+.form-check label { margin: 0; font-weight: 400; color: var(--color-text); }
+
+/* Formulaire en ligne : les saisies restent sur une seule ligne */
+
+.form-inline { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5em; }
+
+.form-inline :is(input, select, textarea) { display: inline-block; width: auto; margin-bottom: 0; }
+
+/* Message d'information ou d'erreur */
+
+.alert {
+    padding: 0.9em 1.1em;
+    margin-bottom: 1.5em;
+    font-size: 0.95em;
+    border-left: 4px solid;
+    border-radius: var(--radius);
+}
+
+.alert.alert-info { color: var(--color-secondary-dark); background-color: rgba(0, 179, 204, 0.12); border-color: var(--color-primary); }
+.alert.alert-error { color: #8c0021; background-color: rgba(220, 20, 60, 0.1); border-color: var(--color-accent); }
+
+/* Variantes de bouton */
+
+.btn.btn-block { display: flex; width: 100%; }
+
+.btn.btn-sm { padding: 0.45em 1em; font-size: 0.88em; }
+
+.btn.btn-danger { background-color: var(--color-accent); }
+.btn.btn-danger:hover { background-color: #a3102f; }
+
+/* Pastille d'etat */
+
+.badge {
+    display: inline-block;
+    padding: 0.2em 0.8em;
+    font-size: 0.85em;
+    font-weight: 600;
+    white-space: nowrap;
+    border-radius: 999px;
+}
+
+.badge.badge-pending { color: #8a5a00; background-color: rgba(255, 170, 0, 0.18); }
+.badge.badge-confirmed { color: #00707f; background-color: rgba(0, 179, 204, 0.18); }
+
+/* Tableau de donnees */
+
+.table-wrapper { overflow-x: auto; }
+
+.table { width: 100%; border-collapse: collapse; }
+
+.table :is(th, td) {
+    padding: 0.9em 1em;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.table th {
+    font-size: 0.85em;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-secondary);
+    background-color: var(--color-bg-soft);
+    white-space: nowrap;
+}
+
+.table tbody tr:hover { background-color: var(--color-bg-soft); }
+
+.table .muted { display: block; font-size: 0.88em; color: var(--color-text-light); }
+
+/* Message affiche a la place d'une liste vide */
+
+.empty-state { padding: 3em 1em; text-align: center; color: var(--color-text-light); }
+
+/* Titre de page avec sous-titre */
+
+.page-header { margin-bottom: 2em; }
+
+.page-header h1 { margin: 0 0 0.2em; font-size: 2.2em; color: var(--color-secondary); }
+
+.page-header p { margin: 0; color: var(--color-text-light); }
 
 /* Fil d'Ariane */
 
@@ -473,7 +598,99 @@ footer.main-footer table.opening-hours tr.today { font-weight: 700; color: #fff;
 
 .doctor-content .btn { margin-top: 2em; }
 
-/* ===== 7. RESPONSIVE ===== */
+/* ===== 7. PAGE DE CONNEXION (login.html) ===== */
+
+.auth { padding: 4em 0; background-color: var(--color-bg-soft); }
+
+.auth > .container { max-width: 460px; }
+
+.auth .form-links {
+    margin: 1.5em 0 0;
+    padding-top: 1.5em;
+    font-size: 0.92em;
+    text-align: center;
+    color: var(--color-text-light);
+    border-top: 1px solid var(--color-border);
+}
+
+.auth .form-links a { color: var(--color-secondary); font-weight: 600; text-decoration: none; }
+.auth .form-links a:hover { text-decoration: underline; }
+
+/* ===== 8. INTERFACE D'ADMINISTRATION (admin.html) ===== */
+
+.admin-header { padding: 0.9em 0; color: #fff; background-color: var(--color-dark); }
+
+.admin-header > .container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em 1.5em;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.admin-header .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.15em;
+    font-size: 2.4em;
+    font-family: 'Tangerine', cursive;
+    line-height: 1;
+    color: var(--color-accent);
+}
+
+.admin-header .logo small {
+    margin-left: 0.6em;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.3em;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #a9b6c2;
+}
+
+.admin-header .session { display: flex; align-items: center; gap: 1.2em; font-size: 0.9em; color: #a9b6c2; }
+.admin-header .session a { color: #fff; text-decoration: none; }
+.admin-header .session a:hover { text-decoration: underline; }
+
+.admin-nav { background-color: var(--color-secondary-dark); }
+
+.admin-nav ul { display: flex; flex-wrap: wrap; margin: 0; padding: 0; list-style-type: none; }
+
+.admin-nav a {
+    display: inline-block;
+    padding: 0.9em 1.3em;
+    font-size: 0.95em;
+    font-weight: 600;
+    color: #b9cbd8;
+    text-decoration: none;
+    border-bottom: 3px solid transparent;
+    transition: color var(--transition), background-color var(--transition), border-color var(--transition);
+}
+
+.admin-nav a:hover { color: #fff; background-color: rgba(255, 255, 255, 0.08); }
+.admin-nav a.active { color: #fff; border-bottom-color: var(--color-primary); }
+
+.admin-main { padding: 2.5em 0 4em; background-color: var(--color-bg-soft); min-height: 60vh; }
+
+.admin-main .card { padding: 0; overflow: hidden; }
+
+.admin-main .card-head {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8em;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2em 1.5em;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.admin-main .card-head h2 { margin: 0; font-size: 1.3em; color: var(--color-secondary); }
+
+/* La colonne des actions garde ses boutons sur une seule ligne */
+
+.admin-main .table :is(th, td):last-child { white-space: nowrap; }
+.admin-main .table td:last-child .form-inline { flex-wrap: nowrap; }
+
+/* ===== 9. RESPONSIVE ===== */
 
 @media only screen and (max-width: 991px) {
     .home-boxes > .container,

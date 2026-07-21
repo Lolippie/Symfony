@@ -21,7 +21,7 @@ class DoctorType extends AbstractType
             ->add('firstName', options:['label'=> 'Prénom'])
             ->add('lastName', options:['label'=> 'Nom'])
             ->add('photo', FileType::class, ['required' => false])
-            ->add('phone', TelType::class, ['label'=> 'Téléphone', 'attr' => ['placeholder' => '06 00 00 00', 'pattern' => '/^(?:0|\+33)[1-9](?:[\s.-]?\d{2}){4}$/']])
+            ->add('phone', TelType::class, ['label'=> 'Téléphone',  'attr' => ['placeholder' => '06 00 00 00 00', 'pattern' => '(?:0|\+33)[1-9](?:[ .\-]?\d{2}){4}']])
             ->add('email', EmailType::class)
             ->add('description')
             ->add('specialties', EntityType::class, [
