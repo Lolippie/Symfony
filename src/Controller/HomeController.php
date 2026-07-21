@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\DoctorRepository;
 use App\Repository\OpeningHourRepository;
+use App\Repository\SpecialtyRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -11,7 +12,7 @@ use Symfony\Component\Routing\Attribute\Route;
 final class HomeController extends AbstractController
 {
     #[Route('/', name: 'app_home')]
-    public function index(DoctorRepository $doctorRepository, OpeningHourRepository $openingHourRepository): Response
+    public function index(DoctorRepository $doctorRepository, OpeningHourRepository $openingHourRepository, SpecialtyRepository $specialtyRepository): Response
     {
         $opening_hours = $openingHourRepository->findAll();
         $doctors = $doctorRepository->findAll();

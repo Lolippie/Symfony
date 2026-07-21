@@ -1,0 +1,10 @@
+<article>
+    <form class="form-appointment">
+
+    <h1>Prendre rendez-vous</h1>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn btn-dark">{{ button_label|default('Envoyer') }}</button>
+{{ form_end(form) }}
+    </form>
+</article>
