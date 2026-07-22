@@ -68,10 +68,21 @@
     <div class="container">
         <nav>
             <ul>
+                {% if is_granted('ROLE_ADMIN')%}
+                    <li><a href="{{path('app_appointments')}}">Demandes de rendez-vous</a></li>
+                {% elseif is_granted('ROLE_USER') %}
+                    <li><a href="{{path('app_my_appointments')}}">Mes rendez-vous</a></li>
+                {%endif%}
                 <li><a href="{{path('app_home')}}">Accueil</a></li>
                 <li><a href="#">La maison médicale</a></li>
                 <li><a href="{{path('app_doctors')}}">Nos docteurs</a></li>
                 <li><a href="#">Nous contacter</a></li>
+                {% if app.user %}
+                    <li> <a href="{{path('app_logout')}}"> Se déconnecter </a> </li>
+                {% else %}
+                    <li> <a href="{{path('app_login')}}"> Se connecter </a> </li>
+                    <li> <a href="{{path('app_register')}}"> Se register </a> </li>
+                {%endif%}
             </ul>
         </nav>
     </div>

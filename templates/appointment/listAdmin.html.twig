@@ -1,0 +1,165 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les demandes de rendez-vous{% endblock %}
+
+{% block body %}
+    <main class="admin-main">
+    <div class="container">
+        <div class="page-header">
+            <h1>Demandes de rendez-vous</h1>
+            <p>Validez une demande en l'affectant à un docteur, ou refusez-la pour la supprimer.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-head">
+                <h2>5 demandes</h2>
+                <form action="#" method="get" class="form-inline">
+                    <label for="status">Filtrer :</label>
+                    <select id="status" name="status">
+                        <option value="">Toutes</option>
+                        <option value="pending">En attente</option>
+                        <option value="confirmed">Validées</option>
+                    </select>
+                    <button type="submit" class="btn btn-dark btn-sm">Appliquer</button>
+                </form>
+            </div>
+
+            <div class="table-wrapper">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Demande</th>
+                            <th>Patient</th>
+                            <th>Créneau souhaité</th>
+                            <th>Motif</th>
+                            <th>Statut</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <strong>#1042</strong>
+                                <span class="muted">20/07/2026 09:14</span>
+                            </td>
+                            <td>
+                                Marie Lefèvre
+                                <span class="muted">m.lefevre@exemple.fr</span>
+                                <span class="muted">0612345678</span>
+                            </td>
+                            <td>Lundi 27/07/2026 – matin</td>
+                            <td>Consultation de suivi</td>
+                            <td><span class="badge badge-pending">En attente</span></td>
+                            <td>
+                                <form action="#" method="post" class="form-inline">
+                                    <select name="doctor" aria-label="Affecter à un docteur">
+                                        <option value="">Affecter à…</option>
+                                        <option>Jack Smith</option>
+                                        <option>Anna Jones</option>
+                                        <option>Marc Dubois</option>
+                                    </select>
+                                    <button type="submit" class="btn btn-light btn-sm">Valider</button>
+                                    <button type="submit" formaction="#" class="btn btn-danger btn-sm">Refuser</button>
+                                </form>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>#1041</strong>
+                                <span class="muted">19/07/2026 18:02</span>
+                            </td>
+                            <td>
+                                Thomas Barré
+                                <span class="muted">t.barre@exemple.fr</span>
+                                <span class="muted">0698765432</span>
+                            </td>
+                            <td>Mercredi 29/07/2026 – après-midi</td>
+                            <td>Douleurs lombaires</td>
+                            <td><span class="badge badge-pending">En attente</span></td>
+                            <td>
+                                <form action="#" method="post" class="form-inline">
+                                    <select name="doctor" aria-label="Affecter à un docteur">
+                                        <option value="">Affecter à…</option>
+                                        <option>Jack Smith</option>
+                                        <option>Anna Jones</option>
+                                        <option>Marc Dubois</option>
+                                    </select>
+                                    <button type="submit" class="btn btn-light btn-sm">Valider</button>
+                                    <button type="submit" formaction="#" class="btn btn-danger btn-sm">Refuser</button>
+                                </form>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>#1040</strong>
+                                <span class="muted">19/07/2026 11:47</span>
+                            </td>
+                            <td>
+                                Sophie Nguyen
+                                <span class="muted">s.nguyen@exemple.fr</span>
+                                <span class="muted">0655112233</span>
+                            </td>
+                            <td>Jeudi 23/07/2026 – matin</td>
+                            <td>Première consultation</td>
+                            <td><span class="badge badge-pending">En attente</span></td>
+                            <td>
+                                <form action="#" method="post" class="form-inline">
+                                    <select name="doctor" aria-label="Affecter à un docteur">
+                                        <option value="">Affecter à…</option>
+                                        <option>Jack Smith</option>
+                                        <option>Anna Jones</option>
+                                        <option>Marc Dubois</option>
+                                    </select>
+                                    <button type="submit" class="btn btn-light btn-sm">Valider</button>
+                                    <button type="submit" formaction="#" class="btn btn-danger btn-sm">Refuser</button>
+                                </form>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>#1039</strong>
+                                <span class="muted">18/07/2026 15:20</span>
+                            </td>
+                            <td>
+                                Karim Haddad
+                                <span class="muted">k.haddad@exemple.fr</span>
+                                <span class="muted">0677889900</span>
+                            </td>
+                            <td>Vendredi 24/07/2026 – après-midi</td>
+                            <td>Suivi du sportif</td>
+                            <td><span class="badge badge-confirmed">Validée</span>
+                            <span class="muted">Jack Smith</span></td>
+                            <td>
+                                <form action="#" method="post" class="form-inline">
+                                    <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
+                                </form>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>#1038</strong>
+                                <span class="muted">17/07/2026 08:55</span>
+                            </td>
+                            <td>
+                                Élise Moreau
+                                <span class="muted">e.moreau@exemple.fr</span>
+                                <span class="muted">0644556677</span>
+                            </td>
+                            <td>Mardi 21/07/2026 – matin</td>
+                            <td>Pédiatrie</td>
+                            <td><span class="badge badge-confirmed">Validée</span>
+                            <span class="muted">Anna Jones</span></td>
+                            <td>
+                                <form action="#" method="post" class="form-inline">
+                                    <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock%}

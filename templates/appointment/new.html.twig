@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes demandes de rendez-vous{% endblock %}
+
+{% block body %}
+    {% include 'appointment/_form.html.twig' with {
+    form: form
+    } %}
+{% endblock %}

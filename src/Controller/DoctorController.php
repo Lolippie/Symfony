@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Service\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
@@ -32,13 +34,21 @@ final class DoctorController extends AbstractController
     }
 
     #[Route('/new', name: 'app_doctor_new', methods:['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $em): Response
+    #[IsGranted('ROLE_ADMIN')]
+    public function new(Request $request, EntityManagerInterface $em, FileUploader $fileUploader): Response
     {
         $doctor = new Doctor();
         $form = $this->createForm(DoctorType::class, $doctor);
 
         $form-> handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
+            /** @var UploadedFile $brochureFile */
+            $photoFile = $form->get('photoFile')->getData();
+            if ($photoFile) {
+                $photoFileName = $fileUploader->upload($photoFile);
+                $doctor->setPhoto($photoFileName);
+            }
+
             $em->persist($doctor);
             $em->flush();
 

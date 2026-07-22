@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes demandes de rendez-vous{% endblock %}
+
+{% block body %}
+    <main class="admin-main">
+    <div class="container">
+        <div class="page-header">
+            <h1>Vos demandes de rendez-vous</h1>
+            <button type="submit" class="btn btn-light btn-sm"><a href="{{path('app_new_appointment')}}">Nouveau rendez-vous</a></button>
+        </div>
+        
+        <div class="card">
+            <div class="card-head">
+                <h2>5 demandes</h2>
+                <form action="#" method="get" class="form-inline">
+                    <label for="status">Filtrer&nbsp;:</label>
+                    <select id="status" name="status">
+                        <option value="">Toutes</option>
+                        <option value="pending">En attente</option>
+                        <option value="confirmed">Validées</option>
+                    </select>
+                    <button type="submit" class="btn btn-dark btn-sm">Appliquer</button>
+                </form>
+            </div>
+
+            <div class="table-wrapper">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Créneau souhaité</th>
+                            <th>Motif</th>
+                            <th>Statut</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for appointment in appointments %}
+                        <tr>
+                            <td>
+                                {{appointment.date|date('d/m/Y')}} - {{ appointment.time|date('H:i') }}
+                            </td>
+                            <td>
+                                {{appointment.message}}
+                            </td>
+                                {%if appointment.getStatus() == "Passé" %}
+                                    <td><span class="badge badge-pending">En attente</span></td>
+                                {% elseif appointment.getStatus() == "Confirmé" %}
+                                    <td><span class="badge badge-confirmed"> {{appointment.doctor.name}}</span></td>
+                                {% elseif appointment.getStatus() == "En attente" %}
+                                    <td><span class="badge badge-pending"> Passé </span></td>
+                                {% endif %}
+                        </tr> 
+                    {% endfor %}  
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock%}

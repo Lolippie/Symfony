@@ -34,7 +34,7 @@
 
     <section class="doctors" id="doctors">
         <div class="container">
-         {{render(controller('App\\Controller\\AppointmentController::new'))}}
+         {{render(controller('App\\Controller\\AppointmentController::showNew'))}}
             {%for doctor in doctors %}
                 {% include 'doctor/_thumbnail.html.twig' with {'doctor' : doctor} only%}
             {%endfor%}

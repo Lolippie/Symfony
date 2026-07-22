@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\AppointmentRepository;
+use App\Enum\AppointmentStatus;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -39,10 +40,6 @@ class Appointment
     private ?\DateTime $date = null;
 
     #[ORM\Column(type: Types::TIME_MUTABLE)]
-    #[Assert\GreaterThanOrEqual(
-    value: 'now',
-    message: "La date doit être dans le futur."
-    )]
     private ?\DateTime $time = null;
 
     #[ORM\ManyToOne(inversedBy: 'appointments')]
@@ -51,6 +48,12 @@ class Appointment
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $message = null;
+
+    #[ORM\ManyToOne(inversedBy: 'appointments')]
+    private ?User $user = null;
+
+    #[ORM\ManyToOne(inversedBy: 'appointments')]
+    private ?Doctor $doctor = null;
 
     public function getId(): ?int
     {
@@ -149,6 +152,43 @@ class Appointment
     public function setMessage(?string $message): static
     {
         $this->message = $message;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getStatus(): AppointmentStatus
+    {
+        if ($this->date < new \DateTime()) {
+            return AppointmentStatus::PASSED;
+        }
+
+        if ($this->doctor !== null) {
+            return AppointmentStatus::CONFIRMED;
+        }
+
+        return AppointmentStatus::PENDING;
+    }
+
+    public function getDoctor(): ?Doctor
+    {
+        return $this->doctor;
+    }
+
+    public function setDoctor(?Doctor $doctor): static
+    {
+        $this->doctor = $doctor;
 
         return $this;
     }

@@ -1,2 +1,4 @@
 Todo :
 diviser la fonction twig pour avoir la logique d'affichage dans le opening hours index
+remettre correctement la liste des rdv pour un user
+mettre correctement la liste des rdv pour admin

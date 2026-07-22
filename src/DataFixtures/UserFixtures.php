@@ -16,6 +16,9 @@ class UserFixtures extends Fixture
         $admin->setEmail('admin@admin.fr');
         $admin->setPassword($this->hasher->hashPassword($admin, '1234'));
         $admin->setRoles(['ROLE_ADMIN']);
+        $admin->setLastName('Admin');
+        $admin->setFirstName('Admin');
+        $admin->setPhone('0600000000');
         // $product = new Product();
         // $manager->persist($product);
 
