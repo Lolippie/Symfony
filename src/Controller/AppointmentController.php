@@ -13,13 +13,15 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Repository\AppointmentRepository;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use App\Event\AppointmentTakenEvent;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 
 final class AppointmentController extends AbstractController
 {
     #[Route('/appointment/new', name: 'app_new_appointment')]
     #[IsGranted('ROLE_USER')]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager,  EventDispatcherInterface $dispatcher): Response
     {
         $user = $this->getUser();
         $appointment = new Appointment();
@@ -34,6 +36,10 @@ final class AppointmentController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($appointment);
             $entityManager->flush();
+
+              $dispatcher->dispatch(
+            new AppointmentTakenEvent($appointment)
+        );
 
             return $this->redirectToRoute('app_my_appointments', [], Response::HTTP_SEE_OTHER);
         }
