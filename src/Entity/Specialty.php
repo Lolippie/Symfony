@@ -6,6 +6,7 @@ use App\Repository\SpecialtyRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: SpecialtyRepository::class)]
 class Specialty
@@ -13,9 +14,11 @@ class Specialty
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['doctor:read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['doctor:read'])]
     private ?string $name = null;
 
     /**

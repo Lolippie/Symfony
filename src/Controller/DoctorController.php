@@ -13,10 +13,9 @@ use App\Entity\Doctor;
 use App\Repository\DoctorRepository;
 use App\Form\DoctorType;
 
-#[Route('/doctors')]
 final class DoctorController extends AbstractController
 {
-    #[Route('/{id}', name: 'app_details_doctor', methods:['GET'], requirements: ['id' => '\d+'])]
+    #[Route('/doctors/{id}', name: 'app_details_doctor', methods:['GET'], requirements: ['id' => '\d+'])]
     public function showDoctor(Doctor $doctor): Response
     {
         return $this->render('doctor/details.html.twig', [
@@ -24,10 +23,17 @@ final class DoctorController extends AbstractController
         ]);
     }
 
-    #[Route('/', name: 'app_doctors', methods:['GET'])]
-    public function showDoctors(DoctorRepository $doctorRepository): Response
+    #[Route('/doctors.{_format}', name: 'app_doctors',requirements:['_format' => 'html|json'], methods:['GET'], defaults: ['_format' =>'html'])]
+    public function showDoctors(Request $request, DoctorRepository $doctorRepository): Response
     {
         $doctors = $doctorRepository->findAll();
+
+        if ($request->getRequestFormat() === 'json') {
+            return $this->json($doctors, context: [
+                'groups' => ['doctor:read']
+            ]);
+        }
+
         return $this->render('doctor/list.html.twig', [
             'doctors' => $doctors,
         ]);

@@ -7,6 +7,7 @@ use App\Enum\AppointmentStatus;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: AppointmentRepository::class)]
 class Appointment
@@ -14,32 +15,40 @@ class Appointment
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['doctor:read'])]
+
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
     #[Assert\Length(min:2, max:255)]
+    #[Groups(['doctor:read'])]
     private ?string $firstName = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
     #[Assert\Length(min:2, max:255)]
+    #[Groups(['doctor:read'])]
     private ?string $lastName = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
     #[Assert\Email]
     #[Assert\Length(max: 255)]
+    #[Groups(['doctor:read'])]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['doctor:read'])]
     private ?string $phone = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     #[Assert\GreaterThanOrEqual(value: 'today', message:"Vous ne pouvez pas prendre rendez-vous ce jour là")]
+    #[Groups(['doctor:read'])]
     private ?\DateTime $date = null;
 
     #[ORM\Column(type: Types::TIME_MUTABLE)]
+    #[Groups(['doctor:read'])]
     private ?\DateTime $time = null;
 
     #[ORM\ManyToOne(inversedBy: 'appointments')]
