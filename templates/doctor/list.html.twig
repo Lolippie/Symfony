@@ -4,6 +4,7 @@
 {%block body%} 
 <main>
     <section class="doctors" id="doctors">
+        <h1> Nos docteurs </h1>
         <div class="container">
             {%for doctor in doctors %}
                 {% include 'doctor/_thumbnail.html.twig' with {'doctor' : doctor} only%}
